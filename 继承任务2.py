@@ -32,9 +32,11 @@ class tudi(chushi):
 
 
 class tusun(tudi):
+    band = ""
 
     def zhengfan(self):
         super().zhengfan()
+        print("徒孙开", self.band, "去费城")
 
 
 tudi = tudi()
@@ -45,6 +47,7 @@ tudi.car = "阿斯顿马丁"
 tudi.chaocai()
 
 tusun = tusun()
-tudi.username = "徒孙"
-tudi.age = 50
-tudi.zhengfan()
+tusun.username = "徒孙"
+tusun.age = 50
+tusun.band = "布加迪"
+tusun.zhengfan()
