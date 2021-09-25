@@ -2,6 +2,10 @@ from threading import Thread
 
 import time
 
+import threading
+
+a = threading.RLock()
+
 dan_ta = 500
 
 
@@ -14,10 +18,12 @@ class shengchan(Thread):
         global dan_ta  # 使用全局变量
         while 1:  # 死循环
             if dan_ta < 500:
+                a.acquire()
                 self.count = self.count + 1
                 dan_ta = dan_ta + 1
                 print("还有", dan_ta, "蛋挞")
-                time.sleep(0.01)
+                # time.sleep(0.01)
+                a.release()
             elif dan_ta > 500:
                 time.sleep(3)
                 break
@@ -33,14 +39,18 @@ class xiaofei(Thread):
         global dan_ta
         while 1:  # 死循环
             if self.money > 0 and dan_ta > 0:
+                a.acquire()
                 self.count = self.count + 1
-                self.money = self.money - 2
+                self.money = self.money - 20
                 dan_ta = dan_ta - 1
                 print(self.username, "买了", self.count, "个蛋挞！", "还剩", self.money)
-                time.sleep(0.01)
+                # time.sleep(0.01)
+                a.release()
             elif self.money == 0:
+                a.acquire()
                 print("没有钱了")
-                print(self.username, "买了", self.count, "个蛋挞！")
+                print(self.username, "买了", self.count, "个蛋挞！###########################")
+                a.release()
                 break
             elif dan_ta == 0:
                 time.sleep(2)
